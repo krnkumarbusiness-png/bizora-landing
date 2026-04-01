@@ -1,4 +1,47 @@
-// Intersection Observer for fade-in animations
+// 1. Mobile Menu Toggle Logic
+const menuToggle = document.getElementById('mobile-menu');
+const mobileNav = document.getElementById('mobile-nav');
+const closeBtn = document.getElementById('close-btn');
+
+menuToggle.addEventListener('click', () => {
+    mobileNav.classList.add('active');
+});
+
+closeBtn.addEventListener('click', () => {
+    mobileNav.classList.remove('active');
+});
+
+// Close mobile nav when clicking on a link
+document.querySelectorAll('.nav-links-mobile a').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileNav.classList.remove('active');
+    });
+});
+
+// 2. Custom Modal Logic (For Start Quiz Buttons)
+const modal = document.getElementById('custom-modal');
+const modalCloseBtn = document.getElementById('modal-close-btn');
+const allQuizButtons = document.querySelectorAll('.start-quiz-btn, .nav-cta, .btn-large');
+
+allQuizButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.add('active');
+    });
+});
+
+// Close modal when clicking button or outside the box
+modalCloseBtn.addEventListener('click', () => {
+    modal.classList.remove('active');
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.classList.remove('active');
+    }
+});
+
+// 3. Reveal Animations on Scroll
 const observerOptions = {
     threshold: 0.1
 };
@@ -15,15 +58,7 @@ document.querySelectorAll('.reveal').forEach((el) => {
     observer.observe(el);
 });
 
-// Mobile Menu Toggle (Basic functionality)
-const mobileMenu = document.getElementById('mobile-menu');
-if (mobileMenu) {
-    mobileMenu.addEventListener('click', () => {
-        alert("Mobile menu clicked. This would open a side drawer in a full implementation.");
-    });
-}
-
-// Smooth scrolling for anchor links
+// 4. Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
